@@ -18,10 +18,7 @@ class expense():
                 else:
                     total_spending.append(float(debit))
             line_count += 1
-
-sum = sum(total_spending)
-print(sum)
-print(total_spending)
+    expenses = sum(total_spending)
 
 '''
 csv_reader = [row for row in csv.reader(csv_file)]
