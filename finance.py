@@ -4,24 +4,6 @@ class Calc:
     def __init__(self, file):
         self.file = file
 
-    def cDate(self):
-        with open(self.file) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter = ',')
-            x = 0
-            line_count = 0
-            for row in csv_reader:
-                x += 1
-                if line_count == x:
-                    print(row[0])
-            line_count += 1
-
-    def date(self):
-        with open('exampledata.csv') as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter = ',')
-            date = list(csv_reader)
-            fDate = date[1][0]
-            print('Starting from ' + ' to ' + fDate)
-
     def exp(self):
         total_expense = []
         with open(self.file) as csv_file:  
@@ -55,12 +37,29 @@ class Calc:
                         total_income.append(float(credit))
                 line_count += 1
         print('Total Income: ' + str(sum(total_income)))
+    
+    def bal(self):
+        with open(self.file) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter = ',')
+            lBal = list(csv_reader)
+            print('This is your starting balance: '+ (lBal[-1][8]) + '\nThis is your closing balance: ' + (lBal[1][8]))
+
+    def date(self):
+        with open(self.file) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter = ',')
+            lDate = list(csv_reader)
+            print('This is you finanacial overview starting from ' + (lDate[-1][0]) + ' up to ' + (lDate[1][0]) + '.')
 
 uname = input('Name: ')
-ufile = input('File: ')
-c1 = Calc(ufile)
+n = int(input('Amount of Files: '))
 print('Hello, ' + uname)
-c1.cDate()
-c1.date()
-c1.exp()
-c1.inc()
+#files = []
+while (n > 0):
+    ufile = input('File ' + str(n) + ' : ')
+    #files += [ufile]
+    c1 = Calc(ufile)
+    c1.date()
+    c1.bal()
+    c1.exp()
+    c1.inc()
+    n -= 1
